@@ -14,7 +14,11 @@ namespace modul3_1302204008
             Console.WriteLine("Table-Driven");
             Console.WriteLine("Nama Buah        |   Kode Buah");
             buah.getKodeBuah();
-            Console.ReadLine();
+
+            Console.WriteLine();
+            Console.WriteLine("====== Posisi ======");
+            PosisiKarakterGame posisi = new PosisiKarakterGame();
+            posisi.kegiatan();
         }
 
     }
@@ -44,5 +48,51 @@ namespace modul3_1302204008
                 Console.WriteLine("{0} \t {1}", key.Key, key.Value);
             }
         }
+    }
+    class PosisiKarakterGame
+    {
+        enum State { Terbang, Jongkok, Berhenti };
+        public void kegiatan()
+        {
+            State state = State.Terbang;
+
+            String[] screenName = { "Terbang", "Jongkok" };
+            do
+            {
+                if(state == State.Terbang) {
+                    Console.WriteLine("posisi take off");
+                }
+                if(state == State.Jongkok) {
+                    Console.WriteLine("posisi Landing");
+                }
+
+                Console.WriteLine("" + screenName[(int)state]);
+                Console.WriteLine();
+                Console.Write("Tekan tombol : ");
+                String kegiatan = Console.ReadLine();
+                switch (state)
+                {
+                    case State.Terbang:
+                        if (kegiatan != "w")
+                        {
+                            state = State.Jongkok;
+                        }
+                        break;
+                    case State.Jongkok:
+                        if (kegiatan != "s")
+                        {
+                            state = State.Terbang;
+                        }
+                        break;
+                    case State.Berhenti:
+                        if (kegiatan == "q")
+                        {
+                            state = State.Berhenti;
+                        }
+                        break;
+                }
+            } while (state != State.Berhenti);
+        }
+
     }
 }

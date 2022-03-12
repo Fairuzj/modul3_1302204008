@@ -10,6 +10,7 @@ namespace modul3_1302204008
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
